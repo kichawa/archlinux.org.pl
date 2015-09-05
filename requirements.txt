@@ -1,0 +1,5 @@
+bbcode==1.0.21
+Django==1.8.4
+mysql==0.0.1
+MySQL-python==1.2.5
+wheel==0.24.0

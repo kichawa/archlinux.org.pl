@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load fromtimestamp %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block box %}
+<div id="content-left-wrapper">
+    <div id="content-left">
+        <div id="intro" class="box">
+            <h2>Prosta, lekka dystrybucja</h2>
+
+            <p>You've reached the website for <strong>Arch Linux</strong>, a
+            lightweight and flexible Linux® distribution that tries to Keep It
+            Simple.</p>
+
+            <p>Currently we have official packages optimized for the i686 and
+            x86-64 architectures. We complement our official package sets with a
+            <a href="https://aur.archlinux.org/" title="Arch User Repository (AUR)">
+                community-operated package repository</a> that grows in size and
+            quality each and every day.</p>
+
+            <p>Our strong community is diverse and helpful, and we pride ourselves
+            on the range of skillsets and uses for Arch that stem from it. Please
+            check out our <a href="http://forum.archlinux.org.pl/" title="Forum">forum</a>
+            to get your feet wet.  Also glance through our <a href="http://wiki.archlinux.org.pl/"
+                                                              title="Arch Wiki">wiki</a>
+            if you want to learn more about Arch.</p>
+
+            <p class="readmore"><a href="/about/"
+                                   title="Dowiedz się więcej o Arch Linuxie">Dowiedz się więcej...</a></p>
+        </div>
+        <div id="news">
+            <h3>
+                <a href="http://{{ FORUM_URL }}/viewforum.php?id={{ FORUM_ID }}"
+                   title="Browse the news archives">Najnowsze wiadomości</a>
+                <span class="arrow"></span>
+            </h3>
+
+            {%for post in posts%}
+            <h4><a href="http://{{ FORUM_URL }}/viewtopic.php?pid={{ post.id }}#p{{ post.id }}" title="Zobacz cały artykuł: {{ post.subject }}">{{ post.subject }}</a></h4>
+            <p class="timestamp">{{ post.posted|todate }}</p>
+            <div class="article-content">{{ post.message|bbcode2html|safe|truncatewords_html:60 }}</div>
+            {%endfor%}
+
+            {% if older_posts %}
+            <h3>
+                <a href="http://{{ FORUM_URL }}/viewforum.php?id={{ FORUM_ID }}"
+                   title="Browse the news archives">Starsze wiadomości</a>
+                <span class="arrow"></span>
+            </h3>
+            <dl class="newslist">
+                {% for post in older_posts %}
+                <dt>{{ pot.posted|todate }}</dt>
+                <dd>
+                <a href="http://{{ FORUM_URL }}/viewtopic.php?pid={{ post.id }}#p{{ post.id }}"
+                   title="Zobacz cały artykuł: {{ post.subject }}">{{ post.subject }}</a>
+                </dd>
+                {% endfor %}
+            </dl>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div id="content-right">
+
+    <div class="widget" id="nav-sidebar">
+        <h4>Dokumentacja</h4>
+        <ul>
+            <li><a title="Instalacja Arch Linuksa" href="https://wiki.archlinux.org/index.php/Official_Arch_Linux_Install_Guide">Instalacja Arch Linuksa</a></li><li>
+            </li><li><a title="Przewodnik początkującego" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide">Przewodnik początkującego</a></li><li>
+            </li><li><a title="Dokumentacja Arch Linuksa" href="https://wiki.archlinux.org">Wiki [EN]</a></li><li>
+            </li><li><a title="polska dokumentacja Arch Linuksa" href="http://wiki.archlinux.org.pl">Wiki [PL]</a></li><li>
+            </li>
+        </ul>
+
+        <h4>Społeczność</h4>
+        <ul>
+            <li><a title="Archcon2011" href="http://2011.archcon.pl">Archcon 2011</a></li><li>
+            </li><li><a title="facebook" href="https://www.facebook.com/archlinuxorgpl">Facebook</a></li><li>
+            </li><li><a title="fortunki" href="http://fortunki.archlinux.pl/">Fortunki [PL]</a></li><li>
+            </li><li><a title="Forum angielskojęzyczne" href="https://bbs.archlinux.org/">Forum [EN]</a></li><li>
+            </li><li><a title="Forum [PL]" href="http://forum.archlinux.org.pl">Forum [PL]</a></li><li>
+            </li><li><a title="google+" href="https://plus.google.com/u/0/b/110224960336136623227/110224960336136623227/posts">Google+</a></li><li>
+            </li><li><a title="Grupa dyskusyjna archlinux.pl" href="https://groups.google.com/group/archlinuxpl">Grupa dyskusyjna [PL]</a></li><li>
+            </li><li><a title="IRC" href="https://wiki.archlinux.org/index.php/IRC_Channels">IRC</a></li><li>
+            </li><li><a title="Planeta [ENG]" href="http://planet.archlinux.org/">Planeta [ENG]</a></li><li>
+            </li><li><a title="Projekty okolo archowe" href="https://wiki.archlinux.org/index.php/Related_Projects">Projekty</a></li><li>
+            </li>
+        </ul>
+
+        <h4>Narzędzia</h4>
+        <ul>
+            <li><a title="Pacnet" href="http://pacnet.karbownicki.com/">Pacnet</a></li><li>
+            </li><li><a title="Status serwerów" href="http://www.archlinux.org/mirrors/status/">Status serwerów</a></li><li>
+            </li>
+        </ul>
+    </div>
+
+    <div id="arch-sponsors" class="widget">
+        <a title="MegiTeam.pl" href="http://megiteam.pl"><img alt="MegiTeam.pl" src="{% static 'portal/megiteam.png' %}"></a>
+    </div>
+</div>
+{% endblock %}
