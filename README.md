@@ -40,11 +40,11 @@ Musisz koniecznie napisać *SECRET_KEY*!
 
 Najszybciej jest skorzystać z shell'a django:
 
-'''
+```
 ./manage shell
 
 from django.utils.crypto import get_random_string
 
 chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 get_random_string(50, chars)
-'''
+```
